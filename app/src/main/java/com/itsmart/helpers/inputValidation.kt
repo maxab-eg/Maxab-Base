@@ -1,4 +1,4 @@
-package com.itsmart.baseproject.utils
+package com.itsmart.helpers
 
 import android.content.Context
 import android.util.Patterns

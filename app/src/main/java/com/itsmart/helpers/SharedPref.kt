@@ -2,21 +2,17 @@ package com.itsmart.helpers
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import atiaf.redstone.Models.DataLogin
+import atiaf.redstone.Models.LoginData
 import atiaf.redstone.Models.UserModel
-
 import com.google.gson.Gson
-
-import java.util.ArrayList
 
 
 /**
  * Created by ATIAF on 3/14/2018.
  */
 
-class SharedPref {
+object SharedPref {
     private val USER_DATA_KEY = "userData"
     private val IS_LOGIN_KEY = "isLogin"
     private val ACCESS_TOKEN_KEY = "accessTokenKey"
@@ -28,7 +24,7 @@ class SharedPref {
         loginFile = context.getSharedPreferences("loginFile", Context.MODE_PRIVATE)
     }
 
-    fun setUserData(activity: Activity, user: DataLogin, accessToken: String) {
+    fun setUserData(activity: Activity, user: LoginData, accessToken: String) {
         initLoginSharedPreference(activity)
         val editor = loginFile!!.edit()
         val gson = Gson()
@@ -39,7 +35,7 @@ class SharedPref {
         editor.apply()
     }
 
-    fun getUserData(activity: Context?): UserModel {
+    open fun getUserData(activity: Context?): UserModel {
         if (activity != null) {
             initLoginSharedPreference(activity)
         }
