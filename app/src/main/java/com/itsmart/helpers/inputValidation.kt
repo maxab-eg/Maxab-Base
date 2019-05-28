@@ -12,7 +12,7 @@ object inputValidation {
 
 
     /**
-     * This method is used to validate email.
+     * This method is used to validate UserName.
      * called when handle validation of user email.
      * @param username of  user
      * @param message is error message to show
@@ -46,7 +46,7 @@ object inputValidation {
     }
 
     /**
-     * This method is used to validate email.
+     * This method is used to validate mobile.
      * called when handle validation of user email.
      * @param mobile of  user
      * @param message is error message to show
@@ -63,7 +63,7 @@ object inputValidation {
     }
 
     /**
-     * This method is used to validate email.
+     * This method is used to validate password.
      * called when handle validation of user email.
      * @param password of user
      * @param message is error message to show
