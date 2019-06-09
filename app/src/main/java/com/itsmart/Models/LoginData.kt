@@ -5,16 +5,6 @@ package atiaf.redstone.Models
  */
 
 data class LoginData(
-    val data: DataLogin,
-    val token: String,
-    val expire: Long
-)
-
-data class DataLogin(
-    val name: String,
-    val email: String,
-    val mobile: String,
-    val accountType: Int,
-    val accountTypeTitle: String,
-    val image: String
+    val data: UserModel,
+    val token: String
 )

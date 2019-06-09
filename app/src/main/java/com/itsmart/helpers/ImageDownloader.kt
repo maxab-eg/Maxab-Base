@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 
 
-class ImageDownloader {
+object ImageDownloader {
 
     /**
      * This method is used to download image from server.
