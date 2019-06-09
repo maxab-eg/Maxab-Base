@@ -12,10 +12,6 @@ import com.google.gson.Gson
 import java.util.ArrayList
 
 
-/**
- * Created by ATIAF on 3/14/2018.
- */
-
 class SharedPref {
     private val USER_DATA_KEY = "userData"
     private val IS_LOGIN_KEY = "isLogin"

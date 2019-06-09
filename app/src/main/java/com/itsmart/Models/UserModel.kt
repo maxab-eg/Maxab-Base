@@ -6,5 +6,6 @@ package atiaf.redstone.Models
 
 class UserModel {
 
+    var id: Int? = 0
     var name: String? = null
 }
