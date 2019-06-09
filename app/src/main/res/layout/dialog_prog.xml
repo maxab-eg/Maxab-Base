@@ -14,14 +14,14 @@
         android:layout_height="150dp"
         android:orientation="vertical">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="centerInside"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="loading.json"
-            app:lottie_loop="true" />
+        <!--<com.airbnb.lottie.LottieAnimationView-->
+            <!--android:id="@+id/animation_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="120dp"-->
+            <!--android:scaleType="centerInside"-->
+            <!--app:lottie_autoPlay="true"-->
+            <!--app:lottie_fileName="loading.json"-->
+            <!--app:lottie_loop="true" />-->
 
     </LinearLayout>
 
