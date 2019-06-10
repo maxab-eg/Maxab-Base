@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.view.Window
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
-import com.itsmart.helpers.SharedPref
+import com.itsmart.baseproject.helpers.SharedPref
 
 class BaseActivity : AppCompatActivity() {
     var progressDialog: Dialog? = null

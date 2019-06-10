@@ -1,19 +1,17 @@
-package com.itsmart.helpers
+package com.itsmart.baseproject.helpers
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import com.google.gson.Gson
-import com.itsmart.Models.MessageResponse
-import com.itsmart.Models.Resource
+import com.itsmart.baseproject.Models.MessageResponse
 import com.itsmart.baseproject.BuildConfig
-import io.reactivex.Observable
+import com.itsmart.baseproject.R
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.*
-import org.reactivestreams.Subscriber
-import retrofit2.Call
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.io.IOException
@@ -66,7 +64,11 @@ object ApiHelper {
         return headers
     }
 
-    fun postMethod(currentActivity: Activity, url: String, requestBody: RequestBody?): Observable<ResponseBody> {
+    fun postMethod(
+        currentActivity: Activity,
+        url: String,
+        requestBody: RequestBody?
+    ): Single<retrofit2.Response<ResponseBody>> {
         var requestBody = requestBody
 
 
@@ -95,7 +97,11 @@ object ApiHelper {
         return apiInterface.postMethod(headers, url, requestBody)
     }
 
-    fun putMethod(currentActivity: Activity, url: String, requestBody: RequestBody?): Observable<ResponseBody> {
+    fun putMethod(
+        currentActivity: Activity,
+        url: String,
+        requestBody: RequestBody?
+    ): Single<retrofit2.Response<ResponseBody>> {
         var requestBody = requestBody
 
 
@@ -124,34 +130,11 @@ object ApiHelper {
         return apiInterface.putMethod(headers, url, requestBody)
     }
 
-//    fun getMethod(currentActivity: Activity, url: String, options: Map<String, String>?): Single<ResponseBody> {
-//        var options = options
-//
-//
-//        val client = OkHttpClient.Builder()
-//            .connectTimeout(TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
-//            .writeTimeout(TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
-//            .readTimeout(TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
-//            .build()
-//
-//
-//        val retrofit = Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl(BuildConfig.BASE_URL)
-//            .client(client)
-//            .build()
-//
-//        if (options == null)
-//            options = HashMap()
-//
-//        val apiInterface = retrofit.create(ApiInterface::class.java!!)
-//
-//        val headers = getHeaders(currentActivity)
-//
-//        return apiInterface.getMethod(headers, url, options)
-//    }
-
-    fun getMethod(currentActivity: Activity, url: String, options: Map<String, String>?): Observable<ResponseBody> {
+    fun getMethod(
+        currentActivity: Activity,
+        url: String,
+        options: Map<String, String>?
+    ): Single<retrofit2.Response<ResponseBody>> {
         var options = options
 
 
@@ -164,6 +147,7 @@ object ApiHelper {
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .build()
@@ -180,21 +164,70 @@ object ApiHelper {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-//    @SuppressLint("CheckResult")
-//    fun handleApiResponses(currentActivity: Activity, call: Observable<ResponseBody>, listener: ApiResponseListener?) {
-//
-//
-//        call.subscribe(
-//            { result ->
-//                val body: ResponseBody = result.().body()
-//                val text: String = body.string()
-//            }
-//            )
+    @SuppressLint("CheckResult")
+    fun handleApiResponses(
+        currentActivity: Activity,
+        call: Single<retrofit2.Response<ResponseBody>>,
+        listener: ApiResponseListener?
+    ) {
+        call.subscribe({ response ->
+            var responseError = ""
+            val code = response.code()
+            var body = MessageResponse("")
+
+            if (response.code() !== SUCCESS && response.code() !== CREATED) {
+
+                try {
+                    responseError = response.body()!!.string()
+                    body = Gson().fromJson<Any>(responseError, MessageResponse::class.java) as MessageResponse
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+            Logger.d("retrofit_url", code.toString() + " : " + response.raw().request().url().toString())
+            Logger.d("retrofit_error", responseError + "")
+            when (code) {
+                BAD_REQUEST ->
+                    listener!!.onError(responseError)
+                FORCE_UPDATE -> {
+
+                }
+                BLOCK -> {
+                }
+                UNAUTHORIZE -> {
+
+                }
+
+                FORBIDDEN -> try {
+                    listener!!.onError(response.body()!!.string())
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
+                SUCCESS, CREATED -> try {
+
+                    listener!!.onSuccess(response.body()!!.string())
+
+                } catch (e: Exception) {
+
+                }
+
+            }
+            listener!!.onFinish()
+        }, { error ->
+            if (error.message != null) {
+                Logger.d("retro_exception", error.message.toString())
+            }
+        }
+
+        )
 
 //    enqueue(
 //    object : Callback<Resource<String>>() {
 //        fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-
+//
 //        }
 //
 //        fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -212,76 +245,9 @@ object ApiHelper {
 //
 //                    } else
 //                        Dialogs.showToast(currentActivity.resources.getString(R.string.no_internet), currentActivity)
-
+//
 //        }
 //    })
-
-
-    fun handleResponse(response: Response, listener: ApiResponseListener?) {
-        var responseError = ""
-        val code = response.code()
-        var body = MessageResponse("")
-
-        if (response.code() !== ApiHelper.SUCCESS && response.code() !== ApiHelper.CREATED) {
-
-            try {
-                responseError = response.body()!!.string()
-                body = Gson().fromJson<Any>(responseError, MessageResponse::class.java) as MessageResponse
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-        }
-        Logger.d("retrofit_url", code.toString() + " : " + response.request().url().toString())
-        Logger.d("retrofit_error", responseError + "")
-        when (code) {
-            ApiHelper.BAD_REQUEST ->
-
-                listener!!.onError(responseError)
-            ApiHelper.FORCE_UPDATE -> {
-            }
-            ApiHelper.BLOCK -> {
-            }
-            ApiHelper.UNAUTHORIZE -> {
-            }
-
-            ApiHelper.FORBIDDEN -> try {
-                listener!!.onError(response.body()!!.string())
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-
-//            ApiHelper.REFRESH_TOKEN -> RefreshToken.refreshToken(currentActivity).enqueue(object :
-//                Callback<RefreshToken.DataTokenResponse>() {
-//                fun onResponse(
-//                    call: Call<RefreshToken.DataTokenResponse>,
-//                    response: Response<RefreshToken.DataTokenResponse>
-//                ) {
-//                    if (response.code() === ApiHelper.SUCCESS && response.body() != null) {
-//                        val sharedPref = SharedPref(currentActivity)
-//                        sharedPref.setToken(response.body().getTokenResponse().getToken())
-//
-//                        listener?.onRefresh()
-//                    }
-//                }
-//
-//                fun onFailure(call: Call<RefreshToken.DataTokenResponse>, t: Throwable) {
-//
-//                }
-//            })
-            ApiHelper.SUCCESS, ApiHelper.CREATED -> try {
-
-                listener!!.onSuccess(response.body()!!.string())
-
-            } catch (e: Exception) {
-
-            }
-
-//                    else -> Dialogs.showToast(response.message(), currentActivity)
-        }
-        //               Dialogs.dismissLoadingDialog()
-        listener!!.onFinish()
     }
 
 
@@ -292,21 +258,21 @@ object ApiHelper {
             @HeaderMap headers: Map<String, String>,
             @Url uri: String,
             @QueryMap options: Map<String, String>
-        ): Observable<ResponseBody>
+        ): Single<retrofit2.Response<ResponseBody>>
 
         @POST
         fun postMethod(
             @HeaderMap headers: Map<String, String>,
             @Url uri: String,
             @Body request: RequestBody?
-        ): Observable<ResponseBody>
+        ): Single<retrofit2.Response<ResponseBody>>
 
         @PUT
         fun putMethod(
             @HeaderMap headers: Map<String, String>,
             @Url uri: String,
             @Body request: RequestBody?
-        ): Observable<ResponseBody>
+        ): Single<retrofit2.Response<ResponseBody>>
 
     }
 

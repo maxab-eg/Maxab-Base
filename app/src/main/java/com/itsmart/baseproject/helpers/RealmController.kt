@@ -1,13 +1,11 @@
-package com.itsmart.helpers
+package com.itsmart.baseproject.helpers
 
 
 import atiaf.redstone.Models.UserModel
-import com.itsmart.Models.UserRealm
-import java.util.ArrayList
- 
+import com.itsmart.baseproject.Models.UserRealm
+
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import io.realm.RealmResults
 import io.realm.exceptions.RealmMigrationNeededException
 
 

@@ -1,7 +1,5 @@
-package com.itsmart.helpers
+package com.itsmart.baseproject.helpers
 
-import android.app.Activity
-import com.itsmart.baseproject.R
 import org.joda.time.DateTime
 import java.text.ParseException
 import java.text.SimpleDateFormat
