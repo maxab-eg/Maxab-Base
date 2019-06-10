@@ -1,4 +1,4 @@
-package com.maxab.Models
+package com.itsmart.baseproject.Models
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

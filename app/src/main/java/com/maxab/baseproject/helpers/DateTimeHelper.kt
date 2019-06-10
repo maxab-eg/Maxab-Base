@@ -1,4 +1,4 @@
-package com.maxab.helpers
+package com.itsmart.baseproject.helpers
 
 import org.joda.time.DateTime
 import java.text.ParseException

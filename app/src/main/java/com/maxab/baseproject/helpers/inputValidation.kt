@@ -1,4 +1,4 @@
-package com.maxab.helpers
+package com.itsmart.baseproject.helpers
 
 import android.content.Context
 import android.util.Patterns
