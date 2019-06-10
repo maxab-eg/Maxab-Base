@@ -223,31 +223,6 @@ object ApiHelper {
         }
 
         )
-
-//    enqueue(
-//    object : Callback<Resource<String>>() {
-//        fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-//
-//        }
-//
-//        fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//            listener!!.onFinish()
-//                Dialogs.dismissLoadingDialog()
-//                if (!Utility.isInternetAvailable())
-//                    if (t.message != null) {
-//                        Logger.d("retro_exception", t.message)
-//
-//                        if (t.message != "Canceled")
-//                            Dialogs.showToast(
-//                                currentActivity.resources.getString(R.string.something_wrong),
-//                                currentActivity
-//                            )
-//
-//                    } else
-//                        Dialogs.showToast(currentActivity.resources.getString(R.string.no_internet), currentActivity)
-//
-//        }
-//    })
     }
 
 
