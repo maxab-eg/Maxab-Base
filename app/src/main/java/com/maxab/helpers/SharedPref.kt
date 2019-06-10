@@ -1,4 +1,4 @@
-package com.itsmart.helpers
+package com.maxab.helpers
 
 import android.app.Activity
 import android.content.Context

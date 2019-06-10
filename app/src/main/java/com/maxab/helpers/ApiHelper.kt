@@ -1,18 +1,13 @@
-package com.itsmart.helpers
+package com.maxab.helpers
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import com.google.gson.Gson
-import com.itsmart.Models.MessageResponse
-import com.itsmart.Models.Resource
-import com.itsmart.baseproject.BuildConfig
+import com.maxab.Models.MessageResponse
+import com.maxab.baseproject.BuildConfig
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.*
-import org.reactivestreams.Subscriber
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*

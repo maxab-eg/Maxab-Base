@@ -1,7 +1,6 @@
-package com.itsmart.helpers
+package com.maxab.helpers
 
 import android.util.Log
-import android.widget.Toast
 import com.google.gson.Gson
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

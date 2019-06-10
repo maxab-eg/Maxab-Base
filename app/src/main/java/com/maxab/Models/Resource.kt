@@ -1,4 +1,4 @@
-package com.itsmart.Models
+package com.maxab.Models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

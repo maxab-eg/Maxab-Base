@@ -1,9 +1,7 @@
-package com.itsmart.baseproject
+package com.maxab.baseproject
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.itsmart.helpers.SharedPref
-import com.itsmart.helpers.inputValidation.isValidEmail
 
 class MainActivity : AppCompatActivity() {
 

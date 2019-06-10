@@ -1,4 +1,4 @@
-package com.itsmart.baseproject
+package com.maxab.baseproject
 
 import android.app.Dialog
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.view.Window
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
-import com.itsmart.helpers.SharedPref
+import com.maxab.helpers.SharedPref
 
 class BaseActivity : AppCompatActivity() {
     var progressDialog: Dialog? = null

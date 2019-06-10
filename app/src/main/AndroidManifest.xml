@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:dist="http://schemas.android.com/apk/distribution"
-          package="com.itsmart.baseproject">
+          package="com.maxab.baseproject">
 
     <dist:module dist:instant="true"/>
 
@@ -12,9 +12,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".BaseActivity">
+        <activity android:name="com.maxab.baseproject.BaseActivity">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.maxab.baseproject.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

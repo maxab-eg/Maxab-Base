@@ -1,6 +1,5 @@
-package com.itsmart.baseproject
+package com.maxab.baseproject
 
-import com.itsmart.helpers.inputValidation.isValidPassword
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
