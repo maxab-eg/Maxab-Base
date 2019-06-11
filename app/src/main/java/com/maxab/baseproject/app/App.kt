@@ -4,6 +4,9 @@ import android.app.Application
 import android.content.pm.ApplicationInfo
 import androidx.appcompat.app.AppCompatDelegate
 import com.itsmart.baseproject.helpers.Logger
+import com.maxab.baseproject.helpers.MyNotificationOpenedHandler
+import com.maxab.baseproject.helpers.NotificationHandler
+import com.onesignal.OneSignal
 
 class App : Application() {
 
@@ -16,6 +19,13 @@ class App : Application() {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         Logger.setMode(isDebuggable)
+
+        OneSignal.startInit(this)
+            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+            .unsubscribeWhenNotificationsAreDisabled(true)
+            .setNotificationReceivedHandler(NotificationHandler(this))
+            .setNotificationOpenedHandler(MyNotificationOpenedHandler(this))
+            .init()
 
     }
 }

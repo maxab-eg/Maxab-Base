@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.itsmart.baseproject.Models.MessageResponse
-import com.itsmart.baseproject.BuildConfig
+import com.maxab.baseproject.BuildConfig
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -8,6 +8,11 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.maxab.baseproject"
+        manifestPlaceholders = [
+                onesignal_app_id               : 'fb94d3f4-e4ce-430e-be46-9f74e311f860',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -61,3 +66,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:1.10.19'
 }
+

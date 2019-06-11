@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import com.google.gson.Gson
 import com.itsmart.baseproject.Models.MessageResponse
-import com.itsmart.baseproject.BuildConfig
-import com.itsmart.baseproject.R
+import com.maxab.baseproject.BuildConfig
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
