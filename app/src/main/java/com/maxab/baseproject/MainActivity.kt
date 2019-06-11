@@ -1,8 +1,8 @@
-package com.itsmart.baseproject
+package com.maxab.baseproject
 
 import android.os.Bundle
+import com.maxab.baseproject.BaseActivity
 import com.maxab.auth.LoginViewModel
-import com.maxab.baseproject.R
 
 class MainActivity : BaseActivity() {
     override fun actionOnSuccess() {

@@ -1,8 +1,8 @@
-package com.itsmart.baseproject.helpers
+package com.maxab.baseproject.helpers
 
 
 import atiaf.redstone.Models.UserModel
-import com.itsmart.baseproject.Models.UserRealm
+import com.maxab.baseproject.Models.UserRealm
 
 import io.realm.Realm
 import io.realm.RealmConfiguration

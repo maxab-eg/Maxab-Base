@@ -1,4 +1,4 @@
-package com.itsmart.baseproject
+package com.maxab.baseproject
 
 import android.app.Dialog
 import android.content.Intent
@@ -10,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import com.google.gson.Gson
-import com.itsmart.baseproject.Models.MessageResponse
-import com.itsmart.baseproject.helpers.ApiHelper
-import com.itsmart.baseproject.helpers.SharedPref
-import com.itsmart.baseproject.helpers.toast
+import com.maxab.baseproject.Models.MessageResponse
+import com.maxab.baseproject.helpers.ApiHelper
+import com.maxab.baseproject.helpers.SharedPref
+import com.maxab.baseproject.helpers.toast
+import com.maxab.baseproject.MainActivity
 import com.maxab.baseproject.R
 import okhttp3.ResponseBody
 import retrofit2.Response

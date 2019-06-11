@@ -1,4 +1,4 @@
-package com.itsmart.baseproject.helpers
+package com.maxab.baseproject.helpers
 
 import android.content.Context
 import android.view.View

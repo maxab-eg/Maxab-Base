@@ -4,8 +4,8 @@ import android.util.Log
 import android.widget.Toast
 import com.google.gson.Gson
 
-import com.itsmart.baseproject.app.App
-import com.itsmart.baseproject.helpers.toast
+import com.maxab.baseproject.app.App
+import com.maxab.baseproject.helpers.toast
 import com.maxab.baseproject.Models.ErrorResponse
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable

@@ -1,8 +1,9 @@
-package com.itsmart.baseproject
+package com.maxab.baseproject
 
 import android.content.Intent
 import android.os.Bundle
 import com.maxab.auth.LoginViewModel
+import com.maxab.baseproject.MainActivity
 import com.maxab.baseproject.R
 
 class LoginActivity : BaseActivity() {

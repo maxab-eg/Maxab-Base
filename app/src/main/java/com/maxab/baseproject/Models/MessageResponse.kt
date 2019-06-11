@@ -1,4 +1,4 @@
-package com.itsmart.baseproject.Models
+package com.maxab.baseproject.Models
 
 
 data class MessageResponse(

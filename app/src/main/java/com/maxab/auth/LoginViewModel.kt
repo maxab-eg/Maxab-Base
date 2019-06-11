@@ -1,10 +1,10 @@
 package com.maxab.auth
 
 import androidx.lifecycle.ViewModel
-import com.itsmart.baseproject.helpers.ApiHelper
-import com.itsmart.baseproject.helpers.ApiHelper.SUCCESS
-import com.itsmart.baseproject.helpers.Logger
-import com.itsmart.baseproject.helpers.SharedPref
+import com.maxab.baseproject.helpers.ApiHelper
+import com.maxab.baseproject.helpers.ApiHelper.SUCCESS
+import com.maxab.baseproject.helpers.Logger
+import com.maxab.baseproject.helpers.SharedPref
 
 class LoginViewModel(listner: ApiHelper.ViewModelListener) : ViewModel() {
     var url: String = "loginUrl"

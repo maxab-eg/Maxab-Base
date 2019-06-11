@@ -1,4 +1,4 @@
-package com.itsmart.baseproject.helpers
+package com.maxab.baseproject.helpers
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView

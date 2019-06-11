@@ -1,10 +1,10 @@
-package com.itsmart.baseproject.helpers
+package com.maxab.baseproject.helpers
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import com.google.gson.Gson
-import com.itsmart.baseproject.Models.MessageResponse
 import com.maxab.baseproject.BuildConfig
+import com.maxab.baseproject.Models.MessageResponse
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

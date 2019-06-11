@@ -1,11 +1,11 @@
-package com.itsmart.baseproject.app
+package com.maxab.baseproject.app
 
 import android.app.Application
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.appcompat.app.AppCompatDelegate
-import com.itsmart.baseproject.helpers.Logger
-import com.itsmart.baseproject.helpers.SharedPref
+import com.maxab.baseproject.helpers.Logger
+import com.maxab.baseproject.helpers.SharedPref
 import com.maxab.baseproject.helpers.MyNotificationOpenedHandler
 import com.maxab.baseproject.helpers.NotificationHandler
 import com.onesignal.OneSignal

@@ -1,10 +1,10 @@
-package com.itsmart.baseproject.helpers
+package com.maxab.baseproject.helpers
 
 import android.content.Context
 import android.content.SharedPreferences
 import atiaf.redstone.Models.UserModel
 import com.google.gson.Gson
-import com.itsmart.baseproject.app.App
+import com.maxab.baseproject.app.App
 
 
 /**
