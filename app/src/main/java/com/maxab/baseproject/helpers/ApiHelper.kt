@@ -9,6 +9,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.*
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -55,10 +56,10 @@ object ApiHelper {
     // connect to server created
     val CREATED = 201
 
-    fun getHeaders(currentActivity: Activity): Map<String, String> {
+    fun getHeaders(): Map<String, String> {
         val headers = HashMap<String, String>()
         headers["Version"] = version.toString()
-        headers["Authorization"] = SharedPref.getAccessToken(currentActivity)
+        headers["Authorization"] = SharedPref.getAccessToken()
 
         return headers
     }
@@ -91,7 +92,7 @@ object ApiHelper {
             requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), "{}")
 
 
-        val headers = getHeaders(currentActivity)
+        val headers = getHeaders()
 
         return apiInterface.postMethod(headers, url, requestBody)
     }
@@ -124,13 +125,12 @@ object ApiHelper {
 
         val apiInterface = retrofit.create(ApiInterface::class.java!!)
 
-        val headers = getHeaders(currentActivity)
+        val headers = getHeaders()
 
         return apiInterface.putMethod(headers, url, requestBody)
     }
 
     fun getMethod(
-        currentActivity: Activity,
         url: String,
         options: Map<String, String>?
     ): Single<retrofit2.Response<ResponseBody>> {
@@ -155,7 +155,7 @@ object ApiHelper {
         if (options == null)
             options = HashMap()
 
-        val headers = getHeaders(currentActivity)
+        val headers = getHeaders()
 
         return retrofit.create(ApiInterface::class.java)
             .getMethod(headers, url, options)
@@ -165,7 +165,6 @@ object ApiHelper {
 
     @SuppressLint("CheckResult")
     fun handleApiResponses(
-        currentActivity: Activity,
         call: Single<retrofit2.Response<ResponseBody>>,
         listener: ApiResponseListener?
     ) {
@@ -256,6 +255,15 @@ object ApiHelper {
         fun onSuccess(response: String)
 
         fun onError(response: String)
+
+        fun onFinish()
+    }
+
+
+    interface ViewModelListener {
+        fun onSuccess()
+
+        fun onError(response: Response<ResponseBody>)
 
         fun onFinish()
     }

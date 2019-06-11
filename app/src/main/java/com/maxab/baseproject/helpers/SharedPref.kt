@@ -1,11 +1,10 @@
 package com.itsmart.baseproject.helpers
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import atiaf.redstone.Models.LoginData
 import atiaf.redstone.Models.UserModel
 import com.google.gson.Gson
+import com.itsmart.baseproject.app.App
 
 
 /**
@@ -20,43 +19,34 @@ object SharedPref {
     private var loginFile: SharedPreferences? = null
 
 
-    private fun initLoginSharedPreference(context: Context) {
-        loginFile = context.getSharedPreferences("loginFile", Context.MODE_PRIVATE)
+    fun initLoginSharedPreference(app: App) {
+        loginFile = app.getSharedPreferences("loginFile", Context.MODE_PRIVATE)
     }
 
-    fun setUserData(activity: Activity, user: LoginData, accessToken: String) {
-        initLoginSharedPreference(activity)
+    fun setUserData(json: String, accessToken: String) {
         val editor = loginFile!!.edit()
-        val gson = Gson()
-        val json = gson.toJson(user)
         editor.putString(USER_DATA_KEY, json)
         editor.putString(ACCESS_TOKEN_KEY, accessToken)
         editor.putBoolean(IS_LOGIN_KEY, true)
         editor.apply()
     }
 
-    open fun getUserData(activity: Context?): UserModel {
-        if (activity != null) {
-            initLoginSharedPreference(activity)
-        }
+    open fun getUserData(): UserModel {
         val gson = Gson()
         val json = loginFile!!.getString(USER_DATA_KEY, "")
         return gson.fromJson<UserModel>(json, UserModel::class.java!!)
     }
 
 
-    fun isLoggedIn(activity: Activity): Boolean {
-        initLoginSharedPreference(activity)
+    fun isLoggedIn(): Boolean {
         return loginFile!!.getBoolean(IS_LOGIN_KEY, false)
     }
 
-    fun getAccessToken(activity: Context): String {
-        initLoginSharedPreference(activity)
+    fun getAccessToken(): String {
         return loginFile!!.getString(ACCESS_TOKEN_KEY, "")
     }
 
-    fun clearData(activity: Activity) {
-        initLoginSharedPreference(activity)
+    fun clearData() {
         val editor = loginFile!!.edit()
         editor.clear()
         editor.apply()

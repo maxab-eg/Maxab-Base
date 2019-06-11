@@ -1,15 +1,16 @@
 package com.itsmart.baseproject.app
 
 import android.app.Application
+import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.appcompat.app.AppCompatDelegate
 import com.itsmart.baseproject.helpers.Logger
+import com.itsmart.baseproject.helpers.SharedPref
 import com.maxab.baseproject.helpers.MyNotificationOpenedHandler
 import com.maxab.baseproject.helpers.NotificationHandler
 import com.onesignal.OneSignal
 
 class App : Application() {
-
     val isDebuggable: Boolean
         get() = 0 != applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
 
@@ -17,6 +18,7 @@ class App : Application() {
         super.onCreate()
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        SharedPref.initLoginSharedPreference(this)
 
         Logger.setMode(isDebuggable)
 

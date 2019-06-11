@@ -39,7 +39,7 @@ object RefreshToken {
         val api = retrofit.create(refreshTokenAPI::class.java)
 
         val request = TokenRequest()
-        val token = SharedPref.getAccessToken(context)
+        val token = SharedPref.getAccessToken()
         request.setToken(token)
 
         return api.getToken(request)

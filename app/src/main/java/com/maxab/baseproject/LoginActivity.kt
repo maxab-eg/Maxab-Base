@@ -1,12 +1,14 @@
 package com.itsmart.baseproject
 
+import android.content.Intent
 import android.os.Bundle
 import com.maxab.auth.LoginViewModel
 import com.maxab.baseproject.R
 
-class MainActivity : BaseActivity() {
+class LoginActivity : BaseActivity() {
     override fun actionOnSuccess() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var intent = Intent(this, MainActivity::class.java)
+        goToActivity(intent)
     }
 
 
@@ -15,6 +17,10 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        viewModel = LoginViewModel(this)
+        showLoadingDialog()
+        viewModel.Login("000", "00")
     }
+
 
 }
