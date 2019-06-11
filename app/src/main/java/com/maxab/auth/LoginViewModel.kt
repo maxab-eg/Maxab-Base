@@ -18,10 +18,8 @@ class LoginViewModel(listner: ApiHelper.ViewModelListener) : ViewModel() {
         var call = ApiHelper.getMethod("api/retailer-app/login", query)
         call.subscribe({ response ->
             var code = response.code()
-            var responseError = response.body()!!.string()
 
             Logger.d("retrofit_url", code.toString() + " : " + response.raw().request().url().toString())
-            Logger.d("retrofit_error", responseError + "")
             if (response.code() == SUCCESS) {
                 SharedPref.setUserData(response.body()!!.string(), response.body().toString())
                 listner.onSuccess()

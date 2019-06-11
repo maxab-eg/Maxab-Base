@@ -19,7 +19,7 @@ class LoginActivity : BaseActivity() {
 
         viewModel = LoginViewModel(this)
         showLoadingDialog()
-        viewModel.Login("000", "00")
+        viewModel.Login("01151421688", "123456")
     }
 
 

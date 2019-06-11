@@ -12,17 +12,14 @@ import butterknife.ButterKnife
 import com.google.gson.Gson
 import com.itsmart.baseproject.Models.MessageResponse
 import com.itsmart.baseproject.helpers.ApiHelper
-import com.itsmart.baseproject.helpers.Logger
 import com.itsmart.baseproject.helpers.SharedPref
 import com.itsmart.baseproject.helpers.toast
-import com.maxab.baseproject.Models.ErrorResponse
 import com.maxab.baseproject.R
-import com.maxab.baseproject.helpers.ResponseObserver
 import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.IOException
 
-abstract class BaseActivity : AppCompatActivity(),ApiHelper.ViewModelListener{
+abstract class BaseActivity : AppCompatActivity(), ApiHelper.ViewModelListener {
     var progressDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,12 +96,13 @@ abstract class BaseActivity : AppCompatActivity(),ApiHelper.ViewModelListener{
         toast.showShortToaster(this, message)
     }
 
-    open fun handleBadRequest(){
+    open fun handleBadRequest() {
 
     }
 
     open fun onApiError(response: Response<ResponseBody>) {
-        var responseError = ""
+        var responseError = response.errorBody()?.string()
+        var messageResponse = Gson().fromJson<MessageResponse>(responseError, MessageResponse::class.java)
         val code = response.code()
 
         when (code) {
@@ -118,7 +116,7 @@ abstract class BaseActivity : AppCompatActivity(),ApiHelper.ViewModelListener{
                 // go to block activity
             }
             ApiHelper.UNAUTHORIZE -> {
-
+                toast.showLongToaster(this, messageResponse.message)
             }
 
             ApiHelper.FORBIDDEN -> try {
@@ -127,8 +125,8 @@ abstract class BaseActivity : AppCompatActivity(),ApiHelper.ViewModelListener{
                 e.printStackTrace()
             }
 
-            else ->{
-                errorMessage(responseError)
+            else -> {
+                errorMessage(messageResponse.message)
             }
         }
     }
