@@ -3,8 +3,6 @@ package com.maxab.baseproject
 import android.content.Intent
 import android.os.Bundle
 import com.maxab.auth.LoginViewModel
-import com.maxab.baseproject.MainActivity
-import com.maxab.baseproject.R
 
 class LoginActivity : BaseActivity() {
     override fun actionOnSuccess() {
@@ -18,10 +16,23 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = LoginViewModel(this)
+        viewModel = LoginViewModel()
         showLoadingDialog()
         viewModel.Login("01151421688", "123456")
+            ?.subscribe({
+                //success
+
+            }, {
+                //error
+
+            })
+
+        viewModel.loading().subscribe { aBoolean ->
+            if (aBoolean!!) {
+                showLoadingDialog()
+            } else {
+                dismissLoadingDialog()
+            }
+        }
     }
-
-
 }

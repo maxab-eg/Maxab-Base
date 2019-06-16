@@ -8,14 +8,18 @@ import com.maxab.baseproject.Models.MessageResponse
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import okhttp3.*
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.io.IOException
-import java.util.HashMap
+import java.util.*
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 object ApiHelper {
@@ -71,18 +75,20 @@ object ApiHelper {
     ): Single<retrofit2.Response<ResponseBody>> {
         var requestBody = requestBody
 
-
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY;
         val client = OkHttpClient.Builder()
             .connectTimeout(TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
+            .addInterceptor(logging)
             .readTimeout(TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
             .build()
 
 
         val retrofit = Retrofit.Builder()
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BuildConfig.BASE_URL)
-            .client(client)
             .build()
 
         val apiInterface = retrofit.create(ApiInterface::class.java!!)
@@ -159,7 +165,7 @@ object ApiHelper {
 
         return retrofit.create(ApiInterface::class.java)
             .getMethod(headers, url, options)
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.from(Executors.newFixedThreadPool(1)))
             .observeOn(AndroidSchedulers.mainThread())
     }
 
